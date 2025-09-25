@@ -1,25 +1,29 @@
 import express from 'express';
-import mysql from 'mysql2';
 import dotenv from 'dotenv';
 
 dotenv.config();
+
+import sequelize from './config/db.js';
+import './models/index.js';
 
 const app = express();
 
 const port = process.env.PORT;
 
 app.set('view engine', 'ejs');
-
 app.set('views', './view');
 
 app.use(express.static('public'));
 
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
-});
+app.use(express.json());
+
+sequelize.sync()
+  .then(() => {
+    console.log('Database synchronized successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to synchronize the database:', err);
+  });
 
 app.get('/', (req, res) => {
   res.render("index", { name: "Ayoub", classe: "JS" });
