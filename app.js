@@ -17,7 +17,7 @@ app.use(express.static('public'));
 
 app.use(express.json());
 
-sequelize.sync()
+sequelize.sync({ alter: true })
   .then(() => {
     console.log('Database synchronized successfully.');
   })
