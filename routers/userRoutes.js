@@ -52,6 +52,7 @@ router.post('/login', async (req, res) => {
         message: "Connexion réussie", 
         user: req.session.user
       });
+      
     } else {
       return res.status(statusCode).json({ message: data });
     }

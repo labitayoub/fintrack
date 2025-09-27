@@ -90,14 +90,14 @@ app.post('/register', async (req, res) => {
     
     if (statusCode === 201) {
       // Redirection vers login après inscription réussie
-      res.redirect('/login?message=Inscription réussie, veuillez vous connecter');
+      res.redirect('/login');
     } else {
       // Redirection vers register avec message d'erreur
-      res.redirect('/register?error=' + encodeURIComponent(data));
+      res.redirect('/register');
     }
   } catch (error) {
     console.error('Registration error:', error);
-    res.redirect('/register?error=Erreur lors de l\'inscription');
+    res.redirect('/register');
   }
 });
 
@@ -122,11 +122,11 @@ app.post('/login', async (req, res) => {
       res.redirect('/dashboard');
     } else {
       // Redirection vers login avec message d'erreur
-      res.redirect('/login?error=' + encodeURIComponent(data));
+      res.redirect('/login');
     }
   } catch (error) {
     console.error('Login error:', error);
-    res.redirect('/login?error=Erreur lors de la connexion');
+    res.redirect('/login');
   }
 });
 
@@ -137,7 +137,7 @@ app.get('/logout', (req, res) => {
       console.error('Logout error:', err);
     }
     res.clearCookie('connect.sid');
-    res.redirect('/login?message=Déconnexion réussie');
+    res.redirect('/login');
   });
 });
 
