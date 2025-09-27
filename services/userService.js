@@ -1,4 +1,4 @@
-import User from "../models/User";
+import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 
 export const registerUser = async ({ nom, email, mot_de_passe, devise }) => {
@@ -6,10 +6,11 @@ export const registerUser = async ({ nom, email, mot_de_passe, devise }) => {
     const findUser = await User.findOne({ where: { email } });
     if (findUser) return { data: "User already exists", statusCode: 400 };
 
-   if (mot_de_passe.length < 6) {
+   if (mot_de_passe.length < 8) {
+
         return { 
-    
-            data: "Le mot de passe doit contenir au moins 6 caractères", 
+
+            data: "Le mot de passe doit contenir au moins 8 caractères", 
             statusCode: 400 
         };
     }
@@ -24,7 +25,7 @@ export const registerUser = async ({ nom, email, mot_de_passe, devise }) => {
     const hashedPassword = await bcrypt.hash(mot_de_passe, 10);
 
     const user = await User.create({ nom, email, mot_de_passe: hashedPassword, devise });
-    
+
     return { data: user , statusCode: 201 };
 };
 

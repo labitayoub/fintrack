@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - FinTrack</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>Tableau de bord FinTrack</h1>
+            <div class="user-info">
+                <span>Bonjour, <%= user.nom %></span>
+                <a href="/logout" class="logout-btn">Déconnexion</a>
+            </div>
+        </header>
+        
+        <main class="dashboard-main">
+            <div class="welcome-card">
+                <h2>Bienvenue sur votre tableau de bord !</h2>
+                <p><strong>Email:</strong> <%= user.email %></p>
+                <p><strong>Devise:</strong> <%= user.devise %></p>
+            </div>
+            
+            <div class="quick-actions">
+                <h3>Actions rapides</h3>
+                <div class="action-buttons">
+                    <button>Ajouter une transaction</button>
+                    <button>Créer un budget</button>
+                    <button>Définir un objectif d'épargne</button>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
